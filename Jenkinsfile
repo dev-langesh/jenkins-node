@@ -21,5 +21,20 @@ pipeline {
       }
     }
 
+    stage('deploy ') {
+      environment {
+        ACCESS_KEY = 'credentials(\'AWS_ACCESS_KEY\')'
+      }
+      steps {
+        sh '''curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+
+sudo ./aws/install'''
+        sh '''echo "${ACCESS_KEY}"
+
+aws configure set access_key_id ${ACCESS_KEY}'''
+      }
+    }
+
   }
 }
