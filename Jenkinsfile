@@ -27,11 +27,12 @@ pipeline {
       }
       steps {
         sh '''curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
 unzip awscliv2.zip
 
-chmod -R 755 /usr/local/aws-cli/
+./aws/install
 
-./aws/install'''
+chmod -R 755 /usr/local/aws-cli/'''
         sh '''echo "${ACCESS_KEY}"
 
 aws configure set access_key_id ${ACCESS_KEY}'''
