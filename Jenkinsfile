@@ -7,5 +7,17 @@ pipeline {
       }
     }
 
+    stage('building') {
+      steps {
+        sh 'npm i'
+      }
+    }
+
+    stage('run') {
+      steps {
+        sh 'npm start'
+      }
+    }
+
   }
 }
