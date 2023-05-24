@@ -9,13 +9,14 @@ pipeline {
 
     stage('building') {
       steps {
-        sh 'npm i'
+        sh 'docker build -t devlangesh/jenkins-node .'
       }
     }
 
-    stage('run') {
+    stage('docker publish') {
       steps {
-        sh 'npm start'
+        sh 'docker login -u devlangesh -p dev33@FSD'
+        sh 'docker push devlangesh/jenkins-node'
       }
     }
 
