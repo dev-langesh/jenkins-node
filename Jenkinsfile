@@ -26,6 +26,7 @@ pipeline {
         ACCESS_KEY = 'credentials(\'AWS_ACCESS_KEY\')'
       }
       steps {
+        sh 'yum install awscli'
         sh '''echo "${ACCESS_KEY}"
 
 aws configure set access_key_id ${ACCESS_KEY}'''
