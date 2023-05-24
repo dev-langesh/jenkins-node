@@ -16,10 +16,10 @@ pipeline {
 
     stage('docker publish') {
       steps {
-         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    sh 'docker login -u $USERNAME -p $PASSWORD'
-                    // Other build and push steps
-                }
+        withCredentials(bindings: [usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+          sh 'docker login -u $USERNAME -p $PASSWORD'
+        }
+
         sh 'docker push "devlangesh/jenkins-node:${BUILD_NUMBER}"'
       }
     }
@@ -29,7 +29,7 @@ pipeline {
         ACCESS_KEY = 'credentials(\'AWS_ACCESS_KEY\')'
       }
       steps {
-        sh 'yum install awscli'
+        sh 'apt install awscli'
         sh '''echo "${ACCESS_KEY}"
 
 aws configure set access_key_id ${ACCESS_KEY}'''
