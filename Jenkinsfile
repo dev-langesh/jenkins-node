@@ -26,13 +26,6 @@ pipeline {
         ACCESS_KEY = 'credentials(\'AWS_ACCESS_KEY\')'
       }
       steps {
-        sh '''curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-
-unzip awscliv2.zip
-
-./aws/install
-
-chmod -R 755 /usr/local/aws-cli/'''
         sh '''echo "${ACCESS_KEY}"
 
 aws configure set access_key_id ${ACCESS_KEY}'''
