@@ -16,7 +16,10 @@ pipeline {
 
     stage('docker publish') {
       steps {
-        sh 'docker login -u devlangesh -p dev33@FSD'
+         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh 'docker login -u $USERNAME -p $PASSWORD'
+                    // Other build and push steps
+                }
         sh 'docker push "devlangesh/jenkins-node:${BUILD_NUMBER}"'
       }
     }
