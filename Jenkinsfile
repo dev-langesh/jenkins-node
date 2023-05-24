@@ -1,7 +1,9 @@
-properties([pipelineTriggers([githubPush()])])
-
 pipeline {
   agent any
+
+  triggers {
+        changeset()
+    }
 
   stages {
     stage('checkout') {
