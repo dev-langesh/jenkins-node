@@ -1,6 +1,5 @@
 pipeline {
   agent any
-
   stages {
     stage('checkout') {
       steps {
@@ -11,7 +10,7 @@ pipeline {
     stage('building') {
       steps {
         sh 'ls'
-        sh 'docker build -t devlangesh/jenkins-node .'
+        sh 'docker build -t "devlangesh/jenkins-node:${BUILD_NUMBER}" .'
       }
     }
 
