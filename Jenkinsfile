@@ -9,6 +9,7 @@ pipeline {
 
     stage('building') {
       steps {
+        sh 'ls'
         sh 'docker build -t devlangesh/jenkins-node .'
       }
     }
