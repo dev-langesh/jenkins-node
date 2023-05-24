@@ -17,7 +17,7 @@ pipeline {
     stage('docker publish') {
       steps {
         sh 'docker login -u devlangesh -p dev33@FSD'
-        sh 'docker push devlangesh/jenkins-node'
+        sh 'docker push "devlangesh/jenkins-node:${BUILD_NUMBER}"'
       }
     }
 
