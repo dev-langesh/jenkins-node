@@ -29,7 +29,7 @@ pipeline {
         ACCESS_KEY = 'credentials(\'AWS_ACCESS_KEY\')'
       }
       steps {
-        sh 'sudo apt install awscli'
+        sh 'apt-get install awscli'
         sh '''echo "${ACCESS_KEY}"
 
 aws configure set access_key_id ${ACCESS_KEY}'''
