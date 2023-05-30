@@ -32,7 +32,7 @@ pipeline {
 
     stage('aws') {
       environment {
-        AWS_ACCESS_KEY_ID = 'z1gYmR3Pbm2SICYEov5X37zSZ54V6eUlNUX4GAeg'
+        AWS_ACCESS_KEY_ID = 'AKIAWDYXJU6IHAD4WOHS'
         AWS_SECRET_ACCESS_KEY = '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'
         AWS_DEFAULT_REGION = 'ap-south-1'
       }
