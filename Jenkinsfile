@@ -32,7 +32,7 @@ pipeline {
 
     stage('aws') {
       steps {
-        sh 'aws ecs update-service --cluster jenkins-node --service jenkins-node-service --force-new-deployment'
+        sh 'aws ecs update-service --cluster jenkins-node --service jenkins-node-service --force-new-deployment --region ap-south-1'
       }
     }
 
