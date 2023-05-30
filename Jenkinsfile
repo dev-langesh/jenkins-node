@@ -20,5 +20,11 @@ pipeline {
       }
     }
 
+    stage('push') {
+      steps {
+        sh 'docker push "devlangesh/jenkins-node:${BUILD_NUMBER}"'
+      }
+    }
+
   }
 }
