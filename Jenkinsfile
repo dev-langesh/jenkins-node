@@ -10,7 +10,7 @@ pipeline {
     stage('building') {
       steps {
         sh 'ls'
-        sh 'docker build -t "devlangesh/jenkins-node:${BUILD_NUMBER}" .'
+        sh 'docker build -t "devlangesh/jenkins-node:latest" .'
       }
     }
 
@@ -26,7 +26,7 @@ pipeline {
 
     stage('push') {
       steps {
-        sh 'docker push "devlangesh/jenkins-node:${BUILD_NUMBER}"'
+        sh 'docker push "devlangesh/jenkins-node:latest"'
       }
     }
 
