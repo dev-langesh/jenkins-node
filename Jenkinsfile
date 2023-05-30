@@ -30,5 +30,11 @@ pipeline {
       }
     }
 
+    stage('aws') {
+      steps {
+        sh 'aws --version'
+      }
+    }
+
   }
 }
