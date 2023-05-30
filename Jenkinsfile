@@ -14,9 +14,13 @@ pipeline {
       }
     }
 
-    stage('login') {
+    stage('docker hub login') {
+      environment {
+        USERNAME = 'devlangesh'
+        PASSWORD = 'dev33@FSD'
+      }
       steps {
-        sh 'docker login -u devlangesh -p dev33@FSD'
+        sh 'docker login -u $USERNAME -p $PASSWORD'
       }
     }
 
