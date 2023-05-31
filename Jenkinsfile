@@ -17,8 +17,8 @@ pipeline {
     stage('docker hub push') {
       steps {
         withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId:'auth_dockerhub',
-                  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
-                                        ]) {
+                          usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
+                                                ]) {
           sh 'docker login -u $USERNAME -p $PASSWORD'
         }
 
@@ -36,11 +36,17 @@ pipeline {
         sh '''aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
 aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
 aws configure set default.region ${AWS_DEFAULT_REGION}'''
-        sh 'echo $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY'
         sh '''#aws ecs update-service --cluster jenkins-node --service jenkins-node-service --force-new-deployment --region ap-south-1
 
 
-aws ec2 run-instances --image-id ami-0607784b46cbe5816 --count 1 --instance-type t2.micro'''
+# aws ec2 run-instances --image-id ami-0607784b46cbe5816 --count 1 --instance-type t2.micro'''
+        sh '''ssh -i ~/aws/aws_key.pem ubuntu@test.langesh.in 
+
+docker build -t test${BUILD_NUMBER} .
+
+docker run --name test --rm -d -e PORT=8000 -p 8000:8000 test:${BUILD_NUMBER}
+
+'''
       }
     }
 
