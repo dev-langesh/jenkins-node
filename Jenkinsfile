@@ -17,8 +17,8 @@ pipeline {
     stage('docker hub push') {
       steps {
         withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId:'auth_dockerhub',
-                          usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
-                                                ]) {
+                                  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
+                                                        ]) {
           sh 'docker login -u $USERNAME -p $PASSWORD'
         }
 
@@ -40,7 +40,7 @@ aws configure set default.region ${AWS_DEFAULT_REGION}'''
 
 
 # aws ec2 run-instances --image-id ami-0607784b46cbe5816 --count 1 --instance-type t2.micro'''
-        sh '''ssh -i ~/aws/aws_key.pem ubuntu@test.langesh.in 
+        sh '''ssh -o StrictHostKeyChecking=no -i /var/jenkins_home/aws/aws_key.pem ubuntu@test.langesh.in
 
 docker build -t test${BUILD_NUMBER} .
 
