@@ -15,12 +15,12 @@ pipeline {
     }
 
     stage('docker hub login') {
-      environment {
-        USERNAME = 'devlangesh'
-        PASSWORD = 'dev33@FSD'
-      }
       steps {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'auth_dockerhub',
+  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
+                        ]){
         sh 'docker login -u $USERNAME -p $PASSWORD'
+        }
       }
     }
 
