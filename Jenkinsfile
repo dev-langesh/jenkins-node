@@ -24,7 +24,7 @@ pipeline {
 
       steps {
         sh 'sudo docker run --name test --rm -d -e PORT=$PORT -p $PORT:$PORT devlangesh/jenkins-node'
-
+        sh 'npm i'
         sh 'sudo npm run test'
       }
     }
