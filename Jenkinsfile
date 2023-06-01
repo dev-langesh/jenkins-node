@@ -19,7 +19,7 @@ pipeline {
     stage('test'){
 
       environment {
-        PORT 8000
+        PORT = 8000
       }
 
       steps {
