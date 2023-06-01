@@ -12,7 +12,7 @@ pipeline {
 
     stage('build') {
       steps {
-        sh 'docker build -t "devlangesh/jenkins-node:latest" .'
+        sh 'sudo docker build -t "devlangesh/jenkins-node:latest" .'
       }
     }
 
@@ -23,9 +23,9 @@ pipeline {
       }
 
       steps {
-        sh 'docker run --name test --rm -d -e PORT=$PORT -p $PORT:$PORT devlangesh/jenkins-node'
+        sh 'sudo docker run --name test --rm -d -e PORT=$PORT -p $PORT:$PORT devlangesh/jenkins-node'
 
-        sh 'npm run test'
+        sh 'sudo npm run test'
       }
     }
 
@@ -34,10 +34,10 @@ pipeline {
         withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId:'auth_dockerhub',
                                                                                   usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
                                                                                                         ]) {
-          sh 'docker login -u $USERNAME -p $PASSWORD'
+          sh 'sudo docker login -u $USERNAME -p $PASSWORD'
         }
 
-        sh 'docker push "devlangesh/jenkins-node:latest"'
+        sh 'sudo docker push "devlangesh/jenkins-node:latest"'
       }
     }
 
