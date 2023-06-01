@@ -1,8 +1,8 @@
 pipeline {
-//   agent {
-//   label 'ja1'
-//   }
-  agent any
+  agent {
+    label 'ja1'
+  }
+
   stages {
     stage('checkout') {
       steps {
@@ -12,7 +12,6 @@ pipeline {
 
     stage('building') {
       steps {
-        sh 'ls'
         sh 'docker build -t "devlangesh/jenkins-node:latest" .'
       }
     }
