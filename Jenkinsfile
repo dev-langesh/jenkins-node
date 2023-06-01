@@ -1,7 +1,4 @@
 pipeline {
-//   agent {
-//   label 'ja1'
-//   }
   agent any
   stages {
     stage('checkout') {
@@ -10,9 +7,8 @@ pipeline {
       }
     }
 
-    stage('building') {
+    stage('build') {
       steps {
-        sh 'ls'
         sh 'docker build -t "devlangesh/jenkins-node:latest" .'
       }
     }
@@ -20,8 +16,8 @@ pipeline {
     stage('docker hub push') {
       steps {
         withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId:'auth_dockerhub',
-                                                                          usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
-                                                                                                ]) {
+                                                                                  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
+                                                                                                        ]) {
           sh 'docker login -u $USERNAME -p $PASSWORD'
         }
 
