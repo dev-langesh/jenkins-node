@@ -33,8 +33,8 @@ sudo docker stop $(sudo docker ps -q)
     stage('docker push') {
       steps {
         withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId:'auth_dockerhub',
-                                                                                                          usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
-                                                                                                                                ]) {
+                                                                                                                  usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
+                                                                                                                                        ]) {
           sh 'sudo docker login -u $USERNAME -p $PASSWORD'
         }
 
@@ -44,7 +44,7 @@ sudo docker stop $(sudo docker ps -q)
 
     stage('deploy') {
       steps {
-        sh 'sudo kubectl set image deployment/jenkins-node-deployment jenkins-node=jenkins-node:$BUILD_NUMBER'
+        sh 'sudo kubectl set image deployment/jenkins-node-deployment jenkins-node=devlangesh/jenkins-node:$BUILD_NUMBER'
       }
     }
 
